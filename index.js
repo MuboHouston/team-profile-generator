@@ -62,14 +62,13 @@ const managerQuestions = () => {
             choices: ["Add Employee", "Done"]
         }
     ])
-    .then(managerInput => {
-        console.log(managerInput);
-
-        //if statement? if done the generateHTML? else add go to addEmployee?
-    })
 }
 
-const addEmployee = () => {
+const addEmployee = (newEmployee) => {
+    if (!newEmployee.employees) {
+        newEmployee.employees = [];
+    }
+
     console.log(`
         ==============
         Add Employee
@@ -151,10 +150,11 @@ const addEmployee = () => {
         }  
     ])
     .then(employeeData => {
+        newEmployee.employees.push(employeeData);
         if(employeeData.confirmAddEmployee) {
-            return addEmployee()
+            return addEmployee(newEmployee)
         } else {
-            console.log(employeeData);
+            console.log(newEmployee.employees);
         }
     })
 }
