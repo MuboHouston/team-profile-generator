@@ -6,14 +6,14 @@ test('creates an intern object', () => {
     expect(intern.school).toEqual(expect.any(String));
 })
 
-test("gets intern's school name", () => {
-    const intern = new Intern("Ashley", 1, "testing@abc.com", "schoolName");
+// test("gets intern's school name", () => {
+//     const intern = new Intern("Ashley", 1, "testing@abc.com", "schoolName");
 
-    expect(intern.getSchool()).toEqual(expect.any(String));
-})
+//     expect(intern.getSchool()).toEqual(expect.any(String));
+// })
 
-test("gets intern role", () => {
-    const intern = new Intern("Ashley", 1, "testing@abc.com", "schoolName");
+// test("gets intern role", () => {
+//     const intern = new Intern("Ashley", 1, "testing@abc.com", "schoolName");
 
-    expect(intern.getRole()).toEqual("Intern");
-});
+//     expect(intern.getRole()).toEqual("Intern");
+// });

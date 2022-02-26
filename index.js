@@ -195,6 +195,7 @@ const addEmployee = () => {
         if(confirmAddEmployee) {
             return addEmployee(teamArr)
         } else {
+            console.log(teamArr)
             return JSON.stringify(teamArr);
         }
     })
@@ -214,7 +215,7 @@ const writeToFile = teamArr => {
 managerQuestions()
     .then(addEmployee)
     .then(teamArr => {
-        return writeToFile(teamArr.toString())
+        return writeToFile(teamArr)
     })
     .catch(err => {
         console.log(err)
