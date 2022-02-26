@@ -1,7 +1,7 @@
+const inquirer = require('inquirer');
 const generatePage = require('./src/generateHTML');
 
-const inquirer = require('inquirer');
-const Employee = require('./lib/Employee');
+employeeArr = []
 
 const managerQuestions = () => {
     return inquirer.prompt([
@@ -56,18 +56,15 @@ const managerQuestions = () => {
             }
         },
         {
-            type: "list",
-            name: "next",
-            message: "Would you like to add an employee or finish building team (Choose One)?",
-            choices: ["Add Employee", "Done"]
+            type: "confirm",
+            name: "confirmAddEmployee",
+            message: "Would you like to add an employee?",
+            default: true
         }
     ])
 }
 
-const addEmployee = (newEmployee) => {
-    if (!newEmployee.employees) {
-        newEmployee.employees = [];
-    }
+const addEmployee = () => {
 
     console.log(`
         ==============
@@ -80,7 +77,14 @@ const addEmployee = (newEmployee) => {
             type: "list",
             name: "role",
             message: "Please choose the employee's role!",
-            choices: ["Engineer", "Intern"]
+            choices: ["Engineer", "Intern"],
+            when: ({confirmAddEmployee}) => {
+                if(!confirmAddEmployee) {
+                    return true
+                } else {
+                    return false;
+                }
+            }
         },
         {
             type: "input",
@@ -97,7 +101,7 @@ const addEmployee = (newEmployee) => {
         {
             type: "input",
             name: "id",
-            message: "Please enter the employee's ID number",
+            message: "Please enter the employee's ID number!",
             validate: idInput => {
                 if(isNaN(idInput)) {
                     return false;
@@ -122,6 +126,13 @@ const addEmployee = (newEmployee) => {
             type: "input",
             name: "github",
             message: "Please enter the engineer's GitHub username!",
+            when: ({ role }) => {
+                if(role === "Engineer") {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
             validate: githubInput => {
                 if(githubInput) {
                     return true
@@ -134,6 +145,13 @@ const addEmployee = (newEmployee) => {
             type: "input",
             name: "school",
             message: "Please enter the name of the intern's school!",
+            when: ({ role }) => {
+                if(role === "Intern") {
+                    return true;
+                } else {
+                    return false;
+                }
+            },
             validate: githubInput => {
                 if(githubInput) {
                     return true
@@ -150,14 +168,20 @@ const addEmployee = (newEmployee) => {
         }  
     ])
     .then(employeeData => {
-        newEmployee.employees.push(employeeData);
+        // let employees;
+
+        employeeArr.push(employeeData);
+
         if(employeeData.confirmAddEmployee) {
-            return addEmployee(newEmployee)
+            return addEmployee(employeeArr)
         } else {
-            console.log(newEmployee.employees);
+            console.log(employeeArr);
         }
     })
 }
 
 managerQuestions()
     .then(addEmployee)
+    .then(teamData => {
+        console.log(employeeArr);
+    });    
