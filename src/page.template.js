@@ -1,7 +1,7 @@
-generateManager = manager => {
+generateEngineer = engineer => {
     return `
     <div>
-        <h3>${manager}</h3>
+        <h3>${engineer}</h3>
         <h2>Manger</h2>
         <p>ID: </p>
         <p>Email: </p>
@@ -15,16 +15,18 @@ generatePage = (data) => {
 
     for(let i = 0; i < data.length; i++) {
         const employee = data [i];
-        const role = employee.role;
+        const role = employee.getRole();
 
-        if(role === "Manager") {
-            const displayManager = generateManager(employee)
+        if(role === "Engineer") {
+            const displayEngineer = generateEngineer(employee)
 
-            pageArr.push(displayManager)
+            pageArr.push(displayEngineer)
         }
     }
 
-    return generateHTML(pageArr)
+    const generateTeam = generateHTML(pageArr)
+
+    return generateTeam;
 }
 
 generateHTML = (data) => {

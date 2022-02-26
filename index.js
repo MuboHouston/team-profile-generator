@@ -200,8 +200,9 @@ const addEmployee = () => {
     })
 }
 
-const writeToFile = (teamArr, managerArr) => {
-    fs.writeFile('./dist/index.html', teamArr, err =>{
+const writeToFile = teamArr => {
+    const pageHTML = generatePage(teamArr) 
+    fs.writeFile('./dist/index.html', pageHTML, err =>{
         if(err) {throw err
     } else {
         console.log("Look at html")
