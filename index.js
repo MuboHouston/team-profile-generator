@@ -62,6 +62,9 @@ const managerQuestions = () => {
             default: true
         }
     ])
+    .then(managerData => {
+        employeeArr.push(managerData)
+    })
 }
 
 const addEmployee = () => {
@@ -104,6 +107,7 @@ const addEmployee = () => {
             message: "Please enter the employee's ID number!",
             validate: idInput => {
                 if(isNaN(idInput)) {
+                    console.log("Please enter the employee's ID number!")
                     return false;
                 } else {
                     return true;
@@ -176,12 +180,10 @@ const addEmployee = () => {
             return addEmployee(employeeArr)
         } else {
             console.log(employeeArr);
+            // console.log(manArr)
         }
     })
 }
 
 managerQuestions()
     .then(addEmployee)
-    .then(teamData => {
-        console.log(employeeArr);
-    });    
