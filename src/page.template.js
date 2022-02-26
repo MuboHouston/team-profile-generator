@@ -10,10 +10,24 @@ generateManager = manager => {
     `
 }
 
-function generatePage(data) {
+generatePage = (data) => {
+    pageArr = [];
 
-    const {Manager, employeeArr} = data;
+    for(let i = 0; i < data.length; i++) {
+        const employee = data [i];
+        const role = employee.role;
 
+        if(role === "Manager") {
+            const displayManager = generateManager(employee)
+
+            pageArr.push(displayManager)
+        }
+    }
+
+    return generateHTML(pageArr)
+}
+
+generateHTML = (data) => {
     return`
     <!DOCTYPE html>
 <html lang="en">

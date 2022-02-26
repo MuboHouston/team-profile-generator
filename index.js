@@ -5,7 +5,8 @@ const Intern = require('./lib/Intern');
 const generatePage = require('./src/page.template.js');
 const fs = require('fs');
 
-employeeArr = []
+teamArr = []
+managerArr = []
 
 const managerQuestions = () => {
     return inquirer.prompt([
@@ -67,12 +68,10 @@ const managerQuestions = () => {
         }
     ])
     .then(managerData => {
-        const { name, id, email, officeNumber} = managerData
+        const { name, id, email, officeNumber } = managerData
         const manager = new Manager(name, id, email, officeNumber)
 
-        console.log(manager)
-
-        employeeArr.push(manager)
+        teamArr.push(manager)
     })
 }
 
@@ -181,36 +180,41 @@ const addEmployee = () => {
         }  
     ])
     .then(employeeData => {
-        let {role, name, id, email, github, school} = employeeData
-        let employees = "";
+        let { role, name, id, email, github, school, confirmAddEmployee} = employeeData
+        let employees;
         
         if(role === "Engineer") {
+            console.log(role)
             employees = new Engineer(name, id, email, github)
-            console.log(employees)
         } else if(role ==="Intern") {
             employees = new Intern(name, id, email, school)
         }
 
-        employeeArr.push(employeeData);
+        teamArr.push(employeeData);
 
-        if(employeeData.confirmAddEmployee) {
-            return addEmployee(employeeArr)
+        if(confirmAddEmployee) {
+            return addEmployee(teamArr)
         } else {
-            return employeeArr;
+            return JSON.stringify(teamArr);
         }
     })
 }
 
-const writeToFile = allTheData => {
-    const pageHTML = generatePage(allTheData)
-    fs.writeFile('./dist/index.html', pageHTML, err =>{
-        if(err) throw err
-    })
+const writeToFile = (teamArr, managerArr) => {
+    fs.writeFile('./dist/index.html', teamArr, err =>{
+        if(err) {throw err
+    } else {
+        console.log("Look at html")
+        console.log(teamArr)
+    }
+})
 }
 
 managerQuestions()
     .then(addEmployee)
-    .then(writeToFile)
-    // .catch(err => {
-    //     console.log(err)
-    // })
+    .then(teamArr => {
+        return writeToFile(teamArr.toString())
+    })
+    .catch(err => {
+        console.log(err)
+    })
