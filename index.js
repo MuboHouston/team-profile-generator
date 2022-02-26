@@ -1,5 +1,9 @@
 const inquirer = require('inquirer');
-const generatePage = require('./src/generateHTML');
+const { writeFile } = require('./utils/generate-site')
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern')
+const generatePage = require('./src/page.template');
 
 employeeArr = []
 
@@ -63,7 +67,12 @@ const managerQuestions = () => {
         }
     ])
     .then(managerData => {
-        employeeArr.push(managerData)
+        const { name, id, email, officeNumber} = managerData
+        const manager = new Manager(name, id, email, officeNumber)
+
+        console.log(manager)
+
+        employeeArr.push(manager)
     })
 }
 
@@ -172,18 +181,41 @@ const addEmployee = () => {
         }  
     ])
     .then(employeeData => {
-        // let employees;
+        let {role, name, id, email, github, school} = employeeData
+        let employees = "";
+        
+        if(role === "Engineer") {
+            employees = new Engineer(name, id, email, github)
+            console.log(employees)
+        } else if(role ==="Intern") {
+            employees = new Intern(name, id, email, school)
+            console.log(employees)
+        }
 
         employeeArr.push(employeeData);
 
         if(employeeData.confirmAddEmployee) {
             return addEmployee(employeeArr)
         } else {
-            console.log(employeeArr);
-            // console.log(manArr)
+            console.log(employeeArr)
+            return employeeArr;
         }
     })
 }
 
 managerQuestions()
     .then(addEmployee)
+    .then(employeeArr => {
+        return generatePage(employeeArr);
+    })
+    .then(pageHTML => {
+        console.log(pageHTML)
+        return writeFile(pageHTML)
+    })
+    // .then(writeFileResponse => {
+    //     console.log(writeFileResponse);
+    //     return copyFile()
+    // })
+    .catch(err => {
+        console.log(err)
+    })
