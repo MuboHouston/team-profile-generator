@@ -1,9 +1,9 @@
 const inquirer = require('inquirer');
-const { writeFile } = require('./utils/generate-site')
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern')
-const generatePage = require('./src/page.template');
+const Intern = require('./lib/Intern');
+const generatePage = require('./src/page.template.js');
+const fs = require('fs');
 
 employeeArr = []
 
@@ -189,7 +189,6 @@ const addEmployee = () => {
             console.log(employees)
         } else if(role ==="Intern") {
             employees = new Intern(name, id, email, school)
-            console.log(employees)
         }
 
         employeeArr.push(employeeData);
@@ -197,25 +196,21 @@ const addEmployee = () => {
         if(employeeData.confirmAddEmployee) {
             return addEmployee(employeeArr)
         } else {
-            console.log(employeeArr)
             return employeeArr;
         }
     })
 }
 
+const writeToFile = allTheData => {
+    const pageHTML = generatePage(allTheData)
+    fs.writeFile('./dist/index.html', pageHTML, err =>{
+        if(err) throw err
+    })
+}
+
 managerQuestions()
     .then(addEmployee)
-    .then(employeeArr => {
-        return generatePage(employeeArr);
-    })
-    .then(pageHTML => {
-        console.log(pageHTML)
-        return writeFile(pageHTML)
-    })
-    // .then(writeFileResponse => {
-    //     console.log(writeFileResponse);
-    //     return copyFile()
+    .then(writeToFile)
+    // .catch(err => {
+    //     console.log(err)
     // })
-    .catch(err => {
-        console.log(err)
-    })
