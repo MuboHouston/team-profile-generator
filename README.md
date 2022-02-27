@@ -5,7 +5,13 @@
 This is a Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person. This app was built using JEST for running unit tests and Inquirer for collecting input from the user.
 
 ## Demo
-Video of the typical user flow
+Video of passing tests using JEST:
+
+<img src="./assets/passing-tests.gif">
+
+<a href="./assets/generated-TPG-page.gif">Link to passing test</a>
+
+Video of the typical user flow:
 
 <img src="./assets/TPG.gif">
 
@@ -13,13 +19,13 @@ Video of the typical user flow
 
 (For better quality, download video from the link above)
 
-Video of generated page
+Video of generated page:
 
 <img src="./assets/generated-TPG-page.gif">
 
 <a href="https://drive.google.com/file/d/1LpRz9MoqRd6l77Bs68Xskn2SkL1GkNDC/view">Link to generated HTML page</a>
 
-Screenshot of generated webpage
+Screenshot of generated webpage:
 
 <img src="./assets/TPG-screenshot.png">
 
