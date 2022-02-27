@@ -7,7 +7,7 @@ This is a Node.js command-line application that takes in information about emplo
 ## Demo
 Video of the typical user flow
 
-<img src="./assets/TPG">
+<img src="./assets/TPG.gif">
 
 <a href="https://drive.google.com/file/d/1RWBfQLLwJhmtZpU4Six8N4Znx8ohMnc8/view">Link to walk-through video</a>
 
