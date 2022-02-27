@@ -60,12 +60,6 @@ const managerQuestions = () => {
                 }
             }
         },
-        {
-            type: "confirm",
-            name: "confirmAddEmployee",
-            message: "Would you like to add an employee?",
-            default: true
-        }
     ])
     .then(managerData => {
         const { name, id, email, officeNumber } = managerData
@@ -87,15 +81,8 @@ const addEmployee = () => {
         {
             type: "list",
             name: "role",
-            message: "Please choose the employee's role!",
-            choices: ["Engineer", "Intern"],
-            when: ({confirmAddEmployee}) => {
-                if(!confirmAddEmployee) {
-                    return true
-                } else {
-                    return false;
-                }
-            }
+            message: "Please choose the role of the employee you wish to include!",
+            choices: ["Engineer", "Intern"]
         },
         {
             type: "input",
@@ -174,13 +161,13 @@ const addEmployee = () => {
         },
         {
             type: "confirm",
-            name: "confirmAddEmployee",
+            name: "confirmAdd",
             message: "Would you like to enter another employee?",
             default: false
         }  
     ])
     .then(employeeData => {
-        let { role, name, id, email, github, school, confirmAddEmployee} = employeeData
+        let { role, name, id, email, github, school, confirmAdd} = employeeData
         let employees;
         
         if(role === "Engineer") {
@@ -192,7 +179,7 @@ const addEmployee = () => {
 
         teamArr.push(employeeData);
 
-        if(confirmAddEmployee) {
+        if(confirmAdd) {
             return addEmployee(teamArr)
         } else {
             console.log(teamArr)
@@ -206,10 +193,19 @@ const writeToFile = teamArr => {
     fs.writeFile('./dist/index.html', pageHTML, err =>{
         if(err) {throw err
     } else {
-        console.log("Look at html")
-        console.log(teamArr)
+        console.log("File copied")
+        // console.log(teamArr)
     }
 })
+}
+
+const copyFile = () => {
+    fs.copyFile("./src/style.css", "./dist/style.css", err =>{
+        if(err) {throw err
+        } else {
+            console.log("Style sheet copied successfully!")
+        }
+    })
 }
 
 managerQuestions()
@@ -217,6 +213,7 @@ managerQuestions()
     .then(teamArr => {
         return writeToFile(teamArr)
     })
+    .then(copyFile)
     .catch(err => {
         console.log(err)
     })

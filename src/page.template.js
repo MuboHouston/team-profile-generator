@@ -1,36 +1,60 @@
 generateManager = manager => {
     return `
-    <div>
-        <h3>${manager.name}</h3>
-        <h2>Manger</h2>
-        <p>ID: ${manager.id}</p>
-        <p>Email: ${manager.email}</p>
-        <p>Office Number: ${manager.officeNumber} </p>
-    </div>
+        <div class="col-4 mt-5">
+            <div class="card h-100">
+                <div class="bg-primary text-white p-2">
+                    <h2 class="manager-name">${manager.name}</h3>
+                    <h3 class="manager-title">Manger</h2>
+                </div>
+
+                <div class="card-body bg-light">
+                    <p class="bg-white manager-id card-text m-0 p-3 border">ID: ${manager.id}</p>
+                    <p class="bg-white manager-email card-text m-0 p-3 border">Email: <a href="mailto:${manager.email}">${manager.email}</a></p>
+                    <p class="bg-white manager-number card-text m-0 p-3 border">Office Number: ${manager.officeNumber}</p>
+                </div>
+            </div>
+        </div>
+    
     `
 }
 
 generateEngineer = engineer => {
     return `
-    <div>
-        <h3>${engineer.name}</h3>
-        <h2>Engineer</h2>
-        <p>ID: ${engineer.id}</p>
-        <p>Email: ${engineer.email}</p>
-        <p>GitHub: ${engineer.github} </p>
-    </div>
+        <div class="col-4 mt-5">
+            <div class="card h-100">
+                <div class="bg-primary text-white p-2">
+                    <h2 class="engineer-name">${engineer.name}</h2>
+                    <h3 class="engineer-title">Engineer</h3>
+                </div>
+
+                <div class="card-body bg-light">
+                    <p class="bg-white p-1 engineer-id card-text m-0 p-3 border">ID: ${engineer.id}</p>
+                    <p class="bg-white p-1 engineer-email card-text m-0 p-3 border">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></p>
+                    <p class="bg-white p-1 engineer-github card-text m-0 p-3 border">Github: <a href="https://www.github.com/${engineer.github}">${engineer.github}</a></p>
+                </div>
+            </div>
+        </div>
+
     `
 }
 
 generateIntern = intern => {
     return `
-    <div>
-        <h3>${intern.name}</h3>
-        <h2>Intern</h2>
-        <p>ID: ${intern.id}</p>
-        <p>Email: ${intern.email}</p>
-        <p>School: ${intern.school} </p>
-    </div>
+        <div class="col-4 mt-5">
+            <div class="card h-100">
+                <div class="bg-primary text-white p-2">
+                    <h2 class="intern-name">${intern.name}</h3>
+                    <h3 class="intern-title">Intern</h2>
+                </div>
+
+                <div class="card-body bg-light">
+                    <p class="bg-white p-1 intern-id card-text m-0 p-3 border">ID: ${intern.id}</p>
+                    <p class="bg-white p-1 intern-email card-text m-0 p-3 border">Email: <a href="mailto:${intern.email}">${intern.email}</a></p>
+                    <p class="bg-white p-1 intern-school card-text m-0 p-3 border">School: ${intern.school}</p>
+                </div>
+            </div>
+        </div>
+    
     `
 }
 
@@ -74,19 +98,32 @@ generatePage = (teamArr) => {
 
 const generateHTML = function (data) {
     return`
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manager</title>
+    <link rel="stylesheet" href="./style.css">
+    <title>Team Profile Generator</title>
 </head>
 <body>
-${data}
+    <header class="header bg-danger text-center text-white">
+        <h1 class="p-5"> 
+            My Team
+        </h1> 
+    </header>
+
+    <main class="container">
+        <div class="team-container row">
+            ${data}
+        </div>
+    </main> 
 </body>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </html>
-    `
+`
 }
 
 module.exports = generatePage;
