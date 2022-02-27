@@ -50,7 +50,7 @@ const managerQuestions = () => {
         {
             type: "input",
             name: "officeNumber",
-            message: "Please enter manger's office number!",
+            message: "Please enter manger's office number! (No special characters)",
             validate: numberInput => {
                 if(isNaN(numberInput)) {
                     console.log("Please enter manger's phone number")

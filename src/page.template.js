@@ -4,13 +4,13 @@ generateManager = manager => {
             <div class="card h-100">
                 <div class="bg-primary text-white p-2">
                     <h2 class="manager-name">${manager.name}</h3>
-                    <h3 class="manager-title">Manger</h2>
+                    <h3 class="manager-title"><i class="fa  fa-solid fa-mug-hot"></i> Manger</h2>
                 </div>
 
                 <div class="card-body bg-light">
                     <p class="bg-white manager-id card-text m-0 p-3 border">ID: ${manager.id}</p>
                     <p class="bg-white manager-email card-text m-0 p-3 border">Email: <a href="mailto:${manager.email}">${manager.email}</a></p>
-                    <p class="bg-white manager-number card-text m-0 p-3 border">Office Number: ${manager.officeNumber}</p>
+                    <p class="bg-white manager-number card-text m-0 p-3 border">Office Number: <a href="tel:${manager.officeNumber}">${manager.officeNumber}</a></p>
                 </div>
             </div>
         </div>
@@ -24,13 +24,13 @@ generateEngineer = engineer => {
             <div class="card h-100">
                 <div class="bg-primary text-white p-2">
                     <h2 class="engineer-name">${engineer.name}</h2>
-                    <h3 class="engineer-title">Engineer</h3>
+                    <h3 class="engineer-title"><i class="fa fa-solid fa-glasses"></i> Engineer</h3>
                 </div>
 
                 <div class="card-body bg-light">
                     <p class="bg-white p-1 engineer-id card-text m-0 p-3 border">ID: ${engineer.id}</p>
                     <p class="bg-white p-1 engineer-email card-text m-0 p-3 border">Email: <a href="mailto:${engineer.email}">${engineer.email}</a></p>
-                    <p class="bg-white p-1 engineer-github card-text m-0 p-3 border">Github: <a href="https://www.github.com/${engineer.github}">${engineer.github}</a></p>
+                    <p class="bg-white p-1 engineer-github card-text m-0 p-3 border">Github: <a href="https://www.github.com/${engineer.github}" target="_blank">${engineer.github}</a></p>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@ generateIntern = intern => {
             <div class="card h-100">
                 <div class="bg-primary text-white p-2">
                     <h2 class="intern-name">${intern.name}</h3>
-                    <h3 class="intern-title">Intern</h2>
+                    <h3 class="intern-title"><i class="fa fas fa-user-graduate"></i> Intern</h2>
                 </div>
 
                 <div class="card-body bg-light">
@@ -105,6 +105,7 @@ const generateHTML = function (data) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <title>Team Profile Generator</title>
 </head>
 <body>
