@@ -7,23 +7,23 @@ This is a Node.js command-line application that takes in information about emplo
 ## Demo
 Video of passing tests using JEST:
 
-<img src="./assets/passing-tests.gif">
-
 <a href="./assets/generated-TPG-page.gif">Link to passing test</a>
+
+<img src="./assets/passing-tests.gif">
 
 Video of the typical user flow:
 
-<img src="./assets/TPG.gif">
-
 <a href="https://drive.google.com/file/d/1RWBfQLLwJhmtZpU4Six8N4Znx8ohMnc8/view">Link to walk-through video</a>
+
+<img src="./assets/TPG.gif">
 
 (For better quality, download video from the link above)
 
 Video of generated page:
 
-<img src="./assets/generated-TPG-page.gif">
-
 <a href="https://drive.google.com/file/d/1LpRz9MoqRd6l77Bs68Xskn2SkL1GkNDC/view">Link to generated HTML page</a>
+
+<img src="./assets/generated-TPG-page.gif">
 
 Screenshot of generated webpage:
 
