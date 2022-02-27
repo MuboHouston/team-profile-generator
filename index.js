@@ -1,13 +1,16 @@
+//node modules
 const inquirer = require('inquirer');
+const { writeFile, copyFile } = require("./utils/generate-site.js")
+
+//classes
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const generatePage = require('./src/page.template.js');
-const fs = require('fs');
 
+//user's input in an array
 teamArr = []
-managerArr = []
 
+//manager questions
 const managerQuestions = () => {
     return inquirer.prompt([
         {
@@ -65,10 +68,12 @@ const managerQuestions = () => {
         const { name, id, email, officeNumber } = managerData
         const manager = new Manager(name, id, email, officeNumber)
 
+        //push answers to the array
         teamArr.push(manager)
     })
 }
 
+//employee(s) questions
 const addEmployee = () => {
 
     console.log(`
@@ -188,32 +193,19 @@ const addEmployee = () => {
     })
 }
 
-const writeToFile = teamArr => {
-    const pageHTML = generatePage(teamArr) 
-    fs.writeFile('./dist/index.html', pageHTML, err =>{
-        if(err) {throw err
-    } else {
-        console.log("File copied")
-        // console.log(teamArr)
-    }
-})
-}
-
-const copyFile = () => {
-    fs.copyFile("./src/style.css", "./dist/style.css", err =>{
-        if(err) {throw err
-        } else {
-            console.log("Style sheet copied successfully!")
-        }
-    })
-}
-
 managerQuestions()
     .then(addEmployee)
     .then(teamArr => {
-        return writeToFile(teamArr)
+        return writeFile(teamArr);
     })
-    .then(copyFile)
+    .then(writeFileResponse => {
+        console.log("fs write response:", writeFileResponse);
+        return copyFile();
+    })
+    .then(copyFileResponse => {
+        console.log("fs copy response:", copyFileResponse)
+    })
     .catch(err => {
         console.log(err)
     })
+

@@ -1,3 +1,4 @@
+//creates manager card(s)
 generateManager = manager => {
     return `
         <div class="col-4 mt-5">
@@ -18,6 +19,7 @@ generateManager = manager => {
     `
 }
 
+//creates engineer card(s)
 generateEngineer = engineer => {
     return `
         <div class="col-4 mt-5">
@@ -38,6 +40,7 @@ generateEngineer = engineer => {
     `
 }
 
+//creates intern card(s)
 generateIntern = intern => {
     return `
         <div class="col-4 mt-5">
@@ -58,13 +61,12 @@ generateIntern = intern => {
     `
 }
 
+//push team cards to the page
 generatePage = (teamArr) => {
-    // const generateTeam = generateHTML(data)
-
-    // return generateTeam;
-
+    //converting from JSON to JS object
     data = JSON.parse(teamArr)
     
+    //array for cards
     pageArr = [];
 
     for(let i = 0; i < data.length; i++) {
@@ -72,16 +74,19 @@ generatePage = (teamArr) => {
         const role = employee.role;
         const manager = employee.officeNumber;
 
+        //calls generateManager function
         if(manager) {
             const displayManager = generateManager(employee)
 
             pageArr.push(displayManager)
         }
+        //calls generateEngineer function
         if(role === "Engineer") {
             const displayEngineer = generateEngineer(employee)
 
             pageArr.push(displayEngineer)
         }
+        //calls generateIntern function
         if(role === "Intern") {
             const displayIntern = generateIntern(employee)
 
@@ -89,13 +94,15 @@ generatePage = (teamArr) => {
         }
     }
 
+    //joins the strings
     const employCards = pageArr.join("")
 
+    //
     const generateTeam = generateHTML(employCards)
-
     return generateTeam;
 }
 
+//generates html file
 const generateHTML = function (data) {
 return`<!DOCTYPE html>
 <html lang="en">
@@ -126,4 +133,5 @@ return`<!DOCTYPE html>
 `
 }
 
+//exports to index.js
 module.exports = generatePage;
